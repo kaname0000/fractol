@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:01:59 by okaname           #+#    #+#             */
-/*   Updated: 2025/02/20 20:09:31 by okaname          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:16:16 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_right_move(t_data *data)
 {
-	data->x -= 30;
+	data->x -= 30 / data->zoom;
 	mlx_destroy_image(data->mlx, data->img);
 	ft_clear_image(data);
 	data->draw(data);
@@ -23,7 +23,7 @@ void	ft_right_move(t_data *data)
 
 void	ft_left_move(t_data *data)
 {
-	data->x += 30;
+	data->x += 30 / data->zoom;
 	mlx_destroy_image(data->mlx, data->img);
 	ft_clear_image(data);
 	data->draw(data);
@@ -32,7 +32,7 @@ void	ft_left_move(t_data *data)
 
 void	ft_up_move(t_data *data)
 {
-	data->y -= 30;
+	data->y -= 30 / data->zoom;
 	mlx_destroy_image(data->mlx, data->img);
 	ft_clear_image(data);
 	data->draw(data);
@@ -41,7 +41,7 @@ void	ft_up_move(t_data *data)
 
 void	ft_down_move(t_data *data)
 {
-	data->y += 30;
+	data->y += 30 / data->zoom;
 	mlx_destroy_image(data->mlx, data->img);
 	ft_clear_image(data);
 	data->draw(data);

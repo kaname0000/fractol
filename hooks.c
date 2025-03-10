@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:58:44 by okaname           #+#    #+#             */
-/*   Updated: 2025/02/20 21:12:16 by okaname          ###   ########.fr       */
+/*   Updated: 2025/02/23 17:04:01 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 
 static int	ft_key_hook(int keycode, t_data *data)
 {
-	if (keycode == 65307)
+	if (keycode == ESCKEY)
 		ft_close_window(data);
-	else if (keycode == 65361)
+	else if (keycode == RIGHTARROR)
 		ft_right_move(data);
-	else if (keycode == 65362)
+	else if (keycode == UPARROR)
 		ft_up_move(data);
-	else if (keycode == 65363)
+	else if (keycode == LEFTA0RROR)
 		ft_left_move(data);
-	else if (keycode == 65364)
+	else if (keycode == DOWNARROR)
 		ft_down_move(data);
-	else if (keycode == 45)
+	else if (keycode == MINUSKEY)
 		mouse_hook(5, 500, 500, data);
-	else if (keycode == 61)
+	else if (keycode == EQUALKEY)
 		mouse_hook(4, 500, 500, data);
+	else if (keycode == AKEY)
+		ft_red(data);
+	else if (keycode == SKEY)
+		ft_green(data);
+	else if (keycode == DKEY)
+		ft_blue(data);
 	return (0);
 }
 
@@ -40,7 +46,12 @@ void	ft_setup_hooks(t_data *data)
 
 int	mouse_hook(int button, int x, int y, t_data *data)
 {
-	if (button == 4)
+	if (button == 1)
+	{
+		data->sign *= -1;
+		return (1);
+	}
+	else if (button == 4)
 	{
 		data->zoom *= 1.1;
 		data->x += (x - MIDDLE) / data->zoom;
@@ -52,7 +63,6 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 		data->x -= (x - MIDDLE) / data->zoom;
 		data->y -= (y - MIDDLE) / data->zoom;
 	}
-	printf("%f,%f\n", data->x, data->y);
 	mlx_destroy_image(data->mlx, data->img);
 	ft_clear_image(data);
 	data->draw(data);

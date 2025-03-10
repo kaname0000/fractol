@@ -6,12 +6,14 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 21:37:38 by okaname           #+#    #+#              #
-#    Updated: 2025/02/19 21:40:54 by okaname          ###   ########.fr        #
+#    Updated: 2025/02/28 13:22:34 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
+# CFLAGS = -O2 -I./includes 
 CFLAGS = -Wall -Wextra -Werror -I./includes 
+LDFLAGS = -lm
 
 MANDATORY = fractol
 
@@ -37,13 +39,15 @@ SRCS = gnl/get_next_line.c \
 		pixel_put.c \
 		set_data.c \
 		move_pixel.c \
+		print_arg_error.c \
+		color_shift.c\
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(MANDATORY)
 
 $(MANDATORY): $(LIBFT) $(PRINTF) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(LMLX) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(LMLX) $(LDFLAGS) -o $@
 
 $(LIBFT):
 	make -C $(LIBFTDIR)
